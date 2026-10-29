@@ -64,7 +64,7 @@ from align_pair.metrics import Metrics, measure
 from align_pair.pairview import Block, blocks, markers
 from align_pair.reader import Record, SequenceError, read_all, read_records
 
-__version__ = "1.0.0rc3"
+__version__ = "1.0.0rc4"
 
 __all__ = [
     "ALPHABETS",

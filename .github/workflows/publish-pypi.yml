@@ -6,7 +6,7 @@ on:
       tag:
         description: Annotated release tag to publish
         required: true
-        default: v1.0.0rc3
+        default: v1.0.0rc4
         type: string
 
 jobs:
@@ -30,7 +30,10 @@ jobs:
         shell: bash
         run: |
           package_version="$(python -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')"
-          test "v${package_version}" = "${{ inputs.tag }}"
+          if [[ "v${package_version}" != "${{ inputs.tag }}" ]]; then
+            echo "::error::Tag ${{ inputs.tag }} does not match package version v${package_version}"
+            exit 1
+          fi
           python - <<'PY'
           import ast
           import pathlib

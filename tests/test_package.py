@@ -34,7 +34,7 @@ class TestVersion:
         assert configured()["project"]["version"] == align_pair.__version__
 
     def test_the_version_is_a_prerelease_of_one_point_zero(self) -> None:
-        assert align_pair.__version__ == "1.0.0rc3"
+        assert align_pair.__version__ == "1.0.0rc4"
 
 
 class TestExports:

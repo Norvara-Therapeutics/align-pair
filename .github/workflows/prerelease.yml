@@ -46,7 +46,10 @@ jobs:
         shell: bash
         run: |
           package_version="$(python -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')"
-          test "v${package_version}" = "${GITHUB_REF_NAME}"
+          if [[ "v${package_version}" != "${GITHUB_REF_NAME}" ]]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} does not match package version v${package_version}"
+            exit 1
+          fi
           python - <<'PY'
           import ast
           import pathlib
